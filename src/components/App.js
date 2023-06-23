@@ -2,20 +2,20 @@ import React from "react";
 import { data } from "../data";
 import Navbar from "./Navbar";
 import MovieCard from "./MovieCard";
+import { addMovies } from "../actions";
+import { ADD_MOVIES } from "../actions";
 
 class App extends React.Component {
   componentDidMount() {
     const { store } = this.props;
     store.subscribe(() => {
       console.log("Updated");
+      this.forceUpdate();
     });
     //make api call to get movies in real world scenario
 
     // Dispatch action
-    store.dispatch({
-      type: "ADD_MOVIES",
-      movies: data,
-    });
+    store.dispatch(addMovies(data));
 
     console.log("State: ", store.getState());
   }
