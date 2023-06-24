@@ -10,6 +10,7 @@ class App extends React.Component {
     store.subscribe(() => {
       console.log("Updated");
       this.forceUpdate();
+      console.log("State: ", store.getState());
     });
     //make api call to get movies in real world scenario
 
@@ -18,6 +19,19 @@ class App extends React.Component {
 
     console.log("State: ", store.getState());
   }
+
+  isMovieFavourite = (movie) => {
+    const { favourites } = this.props.store.getState();
+
+    const index = favourites.indexOf(movie);
+
+    if (index !== -1) {
+      //Movie Found
+      return true;
+    }
+    return false;
+  };
+
   render() {
     const { list } = this.props.store.getState(); // {list: [], favourites: []}
     console.log("RENDER");
@@ -32,7 +46,12 @@ class App extends React.Component {
 
           <div className="List">
             {list.map((movie, index) => (
-              <MovieCard movie={movie} key={`movies-${index}`} />
+              <MovieCard
+                movie={movie}
+                key={`movies-${index}`}
+                dispatch={this.props.store.dispatch}
+                isFavourite={this.isMovieFavourite(movie)}
+              />
             ))}
           </div>
         </div>
