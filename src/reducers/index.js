@@ -5,6 +5,8 @@ import {
   ADD_FAVOURITE,
   REMOVE_FAVOURITE,
   SET_SHOW_FAVOURITES,
+  ADD_SEARCH_RESULT,
+  ADD_MOVIE_TO_LIST,
 } from "../actions";
 
 const initalMoviesState = {
@@ -46,6 +48,12 @@ export function movies(state = initalMoviesState, action) {
         showFavourites: action.val,
       };
 
+    case ADD_MOVIE_TO_LIST:
+      return {
+        ...state,
+        list: [action.movie, ...state.list],
+      };
+
     default:
       return state;
   }
@@ -56,11 +64,28 @@ export function movies(state = initalMoviesState, action) {
 // *** Note: The api we are using for getting movie search result will only return one object***
 const initialSearchState = {
   result: {},
+  showSearchResults: false,
 };
 
 export function search(state = initialSearchState, action) {
   console.log("SEARCH REDUCER");
-  return state;
+
+  switch (action.type) {
+    case ADD_SEARCH_RESULT:
+      return {
+        ...state,
+        result: action.movie,
+        showSearchResults: true,
+      };
+    case ADD_MOVIE_TO_LIST:
+      return {
+        ...state,
+        showSearchResults: false,
+      };
+
+    default:
+      return state;
+  }
 }
 
 // Creating Main reducer -> rootReducer

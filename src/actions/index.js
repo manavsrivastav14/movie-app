@@ -12,6 +12,7 @@ export const ADD_FAVOURITE = "ADD_FAVOURITE";
 export const REMOVE_FAVOURITE = "REMOVE_FAVOURITE";
 export const SET_SHOW_FAVOURITES = "SET_SHOW_FAVOURITES";
 export const ADD_MOVIE_TO_LIST = "ADD_MOVIE_TO_LIST";
+export const ADD_SEARCH_RESULT = "ADD_SEARCH_RESULT";
 
 // Action creators
 export function addMovies(movies) {
@@ -63,6 +64,14 @@ export function handleMovieSearch(movie) {
         //   type: ADD_SEARCH_RESULT,
         //   movie
         // })
+        dispatch(addMovieSearchResult(movie));
       });
+  };
+}
+
+export function addMovieSearchResult(movie) {
+  return {
+    type: ADD_SEARCH_RESULT,
+    movie,
   };
 }
