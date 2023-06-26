@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./components/App";
 import { createStore, applyMiddleware } from "redux";
 import combineReducers from "./reducers";
+import thunk from "redux-thunk";
 
 // used for console logging the action types
 
@@ -24,11 +25,22 @@ const logger =
   ({ dispatch, getState }) =>
   (next) =>
   (action) => {
-    console.log("ACTION_TYPE: ", action.type);
+    // console.log("ACTION_TYPE: ", action.type);
     next(action);
   };
 
-const store = createStore(combineReducers, applyMiddleware(logger));
+// const thunk =
+//   ({ dispatch, getState }) =>
+//   (next) =>
+//   (action) => {
+//     if (typeof action === "function") {
+//       action(dispatch);
+//       return;
+//     }
+//     next(action);
+//   };
+
+const store = createStore(combineReducers, applyMiddleware(logger, thunk));
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
