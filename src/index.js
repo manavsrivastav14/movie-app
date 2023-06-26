@@ -3,13 +3,13 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./components/App";
 import { createStore } from "redux";
-import rootReducer from "./reducers";
+import combineReducers from "./reducers";
 
 // const store = configureStore({
 //   movies,
 // });
 
-const store = createStore(rootReducer);
+const store = createStore(combineReducers);
 
 // console.log("Store:", store);
 
