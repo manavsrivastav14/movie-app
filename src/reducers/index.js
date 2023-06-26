@@ -10,14 +10,8 @@ const initalMoviesState = {
   favourites: [],
   showFavourites: false,
 };
-export default function movies(state = initalMoviesState, action) {
-  // if (action.type === ADD_MOVIES) {
-  //   return {
-  //     ...state,
-  //     list: action.movies,
-  //   };
-  // }
-  // return state;
+export function movies(state = initalMoviesState, action) {
+  console.log("MOVIES REDUCER");
 
   switch (action.type) {
     case ADD_MOVIES:
@@ -55,4 +49,28 @@ export default function movies(state = initalMoviesState, action) {
   }
 }
 
-// const ADD_MOVIES = "ADD_MOVIES";
+// Creating search reducer
+
+// *** Note: The api we are using for getting movie search result will only return one object***
+const initialSearchState = {
+  result: {},
+};
+
+export function search(state = initialSearchState, action) {
+  console.log("SEARCH REDUCER");
+  return state;
+}
+
+// Creating Main reducer -> rootReducer
+
+const initialRootState = {
+  movies: initalMoviesState,
+  search: initialSearchState,
+};
+
+export default function rootReducer(state = initialRootState, action) {
+  return {
+    movies: movies(state.movies, action),
+    search: search(state.search, action),
+  };
+}
