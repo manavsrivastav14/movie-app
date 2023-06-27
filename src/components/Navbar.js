@@ -4,7 +4,7 @@ import { StoreContext } from "..";
 
 class Navbar extends Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       searchText: "",
     };
