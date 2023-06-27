@@ -50,10 +50,9 @@ export function addMovieToList(movie) {
   };
 }
 
-export function handleMovieSearch(movie) {
-  const url = `http://www.odmbapi.com/?apikey=3ca5df7&t=${movie}`;
-
+export function handleMovieSearch(searchText) {
   return function (dispatch) {
+    const url = `http://www.odmbapi.com/?apikey=3ca5df7&t=${searchText}`;
     fetch(url)
       .then((response) => response.json())
       .then((movie) => {
